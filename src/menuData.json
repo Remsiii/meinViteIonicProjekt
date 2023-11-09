@@ -1,0 +1,69 @@
+[
+    {
+      "type": "Vorspeise",
+      "title": "Mancacasi Mami",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
+      "price": 10
+    },
+    {
+      "type": "Vorspeise",
+      "title": "Lol Imagone",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
+      "price": 23.67
+    },
+    {
+      "type": "Vorspeise",
+      "title": "CALAMARI GANG",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
+      "price": 100
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "RISOTTO CU PANCETTA & LEGUME",
+      "description": "Risotto, sparanghel, zucchini, pancetta, mentă.",
+      "price": 50
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "RISOTTO CU TRUFE",
+      "description": "Risotto, unt, cremă de trufe, parmezan, fâșii de trufe proaspete.",
+      "price": 55
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "SPANISH TIGER PRAWNS",
+      "description": "Creveti, usturoi, chilli, boia, lămâie, pătrunjel.",
+      "price": 120
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "TAPAS",
+      "description": "Schiacciata făcută în casă gratinată cu sos de tomate, creveți în ulei cu usturoi, crochete din cremă de lapte și prosciutto, pimento de padron.",
+      "price": 95
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "TAPAS",
+      "description": "Schiacciata făcută în casă gratinată cu sos de tomate, creveți în ulei cu usturoi, crochete din cremă de lapte și prosciutto, pimento de padron.",
+      "price": 95
+    },
+    {
+      "type": "Hauptgericht",
+      "title": "TERIYAKI STIR FRY CU MUSCHI DE VITĂ",
+      "description": "Soba noodles din hrișcă, muschi fille marinați în sos de soia cu ghimbir, usturoi și chilli; ardei, morcovi, ceapă verde, ciuperci șimeji, porumb baby, sparanghel.",
+      "price": 120
+    },
+    {
+      "type": "Nachspeise",
+      "title": "Laurentia Illioni",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
+      "price": 69.42
+    },
+    {
+      "type": "Getränke",
+      "title": "Doamne Ajuta Getränk",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
+      "price": 30
+    }
+  ]
+  
