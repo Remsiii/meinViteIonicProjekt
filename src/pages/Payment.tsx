@@ -15,7 +15,8 @@ const PaymentPage: React.FC = () => {
     // Fügen Sie hier weitere Zustände für die Zahlungsinformationen hinzu
 
     const handlePayment = () => {
-        // Implementieren Sie hier die Logik für den Zahlungsvorgang
+        history.push('/')
+        setItems([]); 
     };
 
     const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -28,29 +29,23 @@ const PaymentPage: React.FC = () => {
                     <IonButtons slot="start">
                         <IonButton onClick={() => history.goBack()}>
                             <IonIcon slot="icon-only" icon={arrowBack} />
-                            Zurück
                         </IonButton>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
                 <IonLabel>Insgesamt: {total} €</IonLabel>
-                <IonInput
-                    value={email}
-                    onIonChange={(e) => setEmail(e.detail.value ?? '')} // Verwenden Sie den Nullish Coalescing Operator (??)
-                    placeholder="E-Mail Adresse"
-                />
-                <IonButton expand="block" onClick={handlePayment}>
+                <IonButton expand="block" onClick={handlePayment} >
                     <IonIcon slot="start" icon={cardOutline} />
-                    Plată Online
+                    Online bezahlen
                 </IonButton>
                 <IonButton expand="block" onClick={handlePayment}>
                     <IonIcon slot="start" icon={cashOutline} />
-                    Plată la Casă
+                    Barzahlung
                 </IonButton>
                 <IonButton expand="block" onClick={handlePayment}>
                     <IonIcon slot="start" icon={peopleOutline} />
-                    Plată de Grup
+                    Gruppenzahlung
                 </IonButton>
 
                 {/* Fügen Sie hier weitere UI-Elemente hinzu, wie z.B. einen Footer */}

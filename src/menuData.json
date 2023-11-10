@@ -2,26 +2,26 @@
     {
       "type": "Vorspeise",
       "title": "Mancacasi Mami",
-      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
-      "price": 10
+      "description": "Calamari mit einen sehr wundervollen Geschmack, welches auf der Zunge zergeht. Beilage sind Pommes und Salat. Sehr lecker und sehr zu empfehlen.",
+      "price": 5.99
     },
     {
       "type": "Vorspeise",
       "title": "Lol Imagone",
-      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
-      "price": 23.67
+      "description": "Gebratene Calamari in einer mit Fenchel und Oregano gewürzten Mehlmischung, begleitet von einer mild-würzigen Mayonnaise und Harissa-Sauce. Dazu wird ein frischer Salat mit einem köstlichen Zitronen-Honig-Dressing gereicht.",
+      "price": 22.69
     },
     {
       "type": "Vorspeise",
       "title": "CALAMARI GANG",
-      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
-      "price": 100
+      "description": "Gebratene Pommes in einer mit Fenchel und Oregano gewürzten Mehlmischung, begleitet von einer nuss.",
+      "price": 9.59
     },
     {
       "type": "Hauptgericht",
       "title": "RISOTTO CU PANCETTA & LEGUME",
       "description": "Risotto, sparanghel, zucchini, pancetta, mentă.",
-      "price": 50
+      "price": 40.99
     },
     {
       "type": "Hauptgericht",
@@ -39,7 +39,7 @@
       "type": "Hauptgericht",
       "title": "TAPAS",
       "description": "Schiacciata făcută în casă gratinată cu sos de tomate, creveți în ulei cu usturoi, crochete din cremă de lapte și prosciutto, pimento de padron.",
-      "price": 95
+      "price": 95.19
     },
     {
       "type": "Hauptgericht",
@@ -57,13 +57,27 @@
       "type": "Nachspeise",
       "title": "Laurentia Illioni",
       "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
-      "price": 69.42
+      "price": 69.49
     },
     {
       "type": "Getränke",
       "title": "Doamne Ajuta Getränk",
-      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați de un sos ușor picant de maioneză și harissa. Totul este pus în valoare de un mix proaspăt de salată, cu dressing delicios de lămâie și miere.",
-      "price": 30
+      "description": "Schiacciata făcută în casă gratinată cu sos de tomate, creveți în ulei cu usturoi, crochete din cremă de lapte și prosciutto, pimento de padron.",
+      "price": 11.99
+    }
+    ,
+    {
+      "type": "Getränke",
+      "title": "Laurentiuss Wasser",
+      "description": "Calamari prăjiți într-un mix de făină aromatizată cu fenicul și oregano, acompaniați, cu dressing delicios de lămâie și miere.",
+      "price": 6.69
+    }
+    ,
+    {
+      "type": "Getränke",
+      "title": "Paulis Zitate - Chninesisch",
+      "description": "Pauli ist ein berühmter schwuchtel und dementsprechend ist sein Zitat auch schwul. Er sagt: 'Ich bin schwul und das ist auch gut so!'",
+      "price": 24.99
     }
   ]
   

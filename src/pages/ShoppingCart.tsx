@@ -4,7 +4,7 @@ import {
   IonButton, IonIcon, IonInput, IonHeader, IonToolbar,
   IonTitle, IonFooter, IonButtons, IonBackButton
 } from '@ionic/react';
-import { pencilOutline, trashOutline, closeCircle, removeCircleOutline, addCircleOutline } from 'ionicons/icons';
+import { pencilOutline, trashOutline, closeCircle, removeCircleOutline, addCircleOutline, pricetagOutline, cashOutline, cardOutline, } from 'ionicons/icons';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 import { useHistory } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const ShoppingCartPage: React.FC = () => {
       updateQuantity(itemTitle, item.quantity + 1);
     }
   };
-  
+
   const decreaseQuantity = (itemTitle: string) => {
     const item = items.find(item => item.title === itemTitle);
     if (item && item.quantity > 1) { // Stellen Sie sicher, dass die Menge nicht unter 1 fällt
@@ -34,15 +34,17 @@ const ShoppingCartPage: React.FC = () => {
     }
   };
 
+  const clearCart = () => {
+    setItems([]); // Setzt den Warenkorb zurück, indem ein leeres Array übergeben wird
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Cosul Meu</IonTitle>
+          <IonTitle>Warenkorb</IonTitle>
           <IonButtons slot="start">
             <IonBackButton />
-          </IonButtons>
-          <IonButtons slot="end">
             <IonButton onClick={() => history.goBack()}>
               <IonIcon slot="icon-only" icon={closeCircle} />
             </IonButton>
@@ -61,9 +63,6 @@ const ShoppingCartPage: React.FC = () => {
                 <h2 style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{item.title}</h2>
                 <p style={{ fontSize: '1rem' }}>{`${item.price.toFixed(2)} €`}</p>
               </IonLabel>
-
-              
-
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <IonButton fill="clear" onClick={() => decreaseQuantity(item.title)}>
                   <IonIcon icon={removeCircleOutline} />
@@ -87,24 +86,30 @@ const ShoppingCartPage: React.FC = () => {
         </IonList>
       </IonContent>
       <IonFooter style={{ padding: '1rem' }}>
-        <IonButton expand="block" style={{ marginBottom: '1rem' }}>
-          Goleste Cosul
+        <IonButton expand="block" onClick={clearCart} style={{ marginBottom: '1rem' }}>
+          <IonIcon slot="start" icon={trashOutline} />
+          Alles Löschen
         </IonButton>
         <IonButton expand="block" style={{ marginBottom: '1rem' }}>
-          Aplica Cupon
+          <IonIcon slot="start" icon={pricetagOutline} />
+          Coupon anwenden
         </IonButton>
         <IonButton expand="block" style={{ marginBottom: '1rem' }}>
-          Adauga Bacsis
+          <IonIcon slot="start" icon={cashOutline} />
+          Trinkgeld hinzufügen
         </IonButton>
+        
+        <div style={{ borderTop: '1px solid #e0e0e0', margin: '16px 0' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
-          <IonLabel style={{ fontSize: '1.1rem' }}>TOTAL:</IonLabel>
+          <IonLabel style={{ fontSize: '1.1rem' }}>INGESAMT:</IonLabel>
           <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>
             {/* Hier sollten Sie die Gesamtsumme berechnen und anzeigen */}
             {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)} €
           </IonLabel>
         </div>
         <IonButton expand="block" onClick={() => history.push('/payment')}>
-            Plateste
+          <IonIcon slot="start" icon={cardOutline} />
+          Bezahlen
         </IonButton>
       </IonFooter>
     </IonPage>

@@ -20,15 +20,18 @@ const Home: FC = () => {
 
   const addToCart = (newItem: CartItem) => {
     setItems((currentItems) => {
-      const itemIndex = currentItems.findIndex((item) => item.title === newItem.title);
-      if (itemIndex !== -1) {
-        // Update Quantity
-        const updatedItems = [...currentItems];
-        updatedItems[itemIndex].quantity += 1;
+      const existingItemIndex = currentItems.findIndex((item) => item.title === newItem.title);
+      if (existingItemIndex > -1) {
+        // Wenn das Item bereits existiert, erhöhe die Anzahl
+        const updatedItems = currentItems.slice(); // Erstellt eine Kopie des Arrays
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + 1,
+        };
         return updatedItems;
       } else {
-        // Add new Item
-        return [...currentItems, newItem];
+        // Wenn das Item noch nicht existiert, füge es hinzu
+        return [...currentItems, { ...newItem, quantity: 1 }];
       }
     });
   };
@@ -45,34 +48,34 @@ const Home: FC = () => {
 
   const cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
 
-  
+
 
   return (
     <IonPage>
-    <div className="flex items-center"> {/* Füge margin-y hinzu, um Abstand nach oben und unten zu geben */}
+      <div className="flex items-center"> {/* Füge margin-y hinzu, um Abstand nach oben und unten zu geben */}
         <IonButton fill="clear" onClick={scrollPrevious} > {/* Verringertes Padding */}
           <IonIcon icon={arrowBack} /> {/* Kleinere Icon-Größe */}
         </IonButton>
-      
-      <IonSegment
-        value={selectedCategory}
-        onIonChange={e => {
-          const newValue = String(e.detail.value);
-          setSelectedCategory(newValue);
-      }}
-        scrollable
-      >
-        {categories.map((category, index) => (
-          <IonSegmentButton key={index} value={category} className={selectedCategory === category ? 'selected-category' : ''}>
-            <IonLabel style={{ fontSize: '1.2em', padding: '8px 16px' }}>{category}</IonLabel>
-          </IonSegmentButton>
-        ))}
-      </IonSegment>
 
-      <IonButton fill="clear" onClick={scrollNext}>
-        <IonIcon icon={arrowForward} />
-      </IonButton>
-    </div>
+        <IonSegment
+          value={selectedCategory}
+          onIonChange={e => {
+            const newValue = String(e.detail.value);
+            setSelectedCategory(newValue);
+          }}
+          scrollable
+        >
+          {categories.map((category, index) => (
+            <IonSegmentButton key={index} value={category} className={selectedCategory === category ? 'selected-category' : ''}>
+              <IonLabel style={{ fontSize: '1.1em', padding: '8px 16px' }}>{category}</IonLabel>
+            </IonSegmentButton>
+          ))}
+        </IonSegment>
+
+        <IonButton fill="clear" onClick={scrollNext}>
+          <IonIcon icon={arrowForward} />
+        </IonButton>
+      </div>
 
       <IonContent>
         {menuData
@@ -86,18 +89,26 @@ const Home: FC = () => {
           ))
         }
       </IonContent>
-      <IonButton
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-        }}
-        onClick={() => history.push('/cart')}
-      >
-        🛒
-        <IonBadge color="primary">{cartItemCount}</IonBadge>
-      </IonButton>
-      {/* Warenkorb-Overlay oder Modal hinzufügen, falls cartVisible true ist */}
+      {cartItemCount > 0 && (
+        <IonButton
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            backgroundColor: '#9CBF91',
+            borderRadius: '50%',
+            width: '66px',
+            height: '66px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          fill="clear"
+          onClick={() => history.push('/cart')}
+        >
+          🛒 {cartItemCount}
+        </IonButton>
+      )}
     </IonPage>
   );
 };
