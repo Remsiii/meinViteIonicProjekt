@@ -49,6 +49,7 @@ const App: React.FC = () => {
                   <SignInForm />
                 </AuthLayout>
               </Route>
+              
               <Route path="/sign-up">
                 <AuthLayout>
                   <SignUpForm />

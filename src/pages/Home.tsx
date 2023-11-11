@@ -7,8 +7,6 @@ import { CartItem } from '../types/CartItem';
 import { arrowBack, arrowForward } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 
-
-
 const Home: FC = () => {
   const { items, setItems } = useShoppingCart();
   const history = useHistory();
@@ -18,6 +16,7 @@ const Home: FC = () => {
   const categories = Array.from(new Set(menuData.map(item => item.type)));
   const categoryIndex = categories.indexOf(selectedCategory);
 
+  
   const addToCart = (newItem: CartItem) => {
     setItems((currentItems) => {
       const existingItemIndex = currentItems.findIndex((item) => item.title === newItem.title);
@@ -56,7 +55,6 @@ const Home: FC = () => {
         <IonButton fill="clear" onClick={scrollPrevious} > {/* Verringertes Padding */}
           <IonIcon icon={arrowBack} /> {/* Kleinere Icon-Größe */}
         </IonButton>
-
         <IonSegment
           value={selectedCategory}
           onIonChange={e => {

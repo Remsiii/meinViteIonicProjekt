@@ -1,20 +1,33 @@
-import React from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import React, { ReactNode } from 'react';
+import { useUserContext } from "../contexts/AuthContext";
 
-interface AuthLayoutProps extends RouteProps {
-  // Du kannst zusätzliche Props definieren, die du möglicherweise übergeben musst
-}
-
-const AuthLayout: React.FC<AuthLayoutProps> = (props) => {
-  const isAuthenticated = false;
-
-  if (!isAuthenticated) {
-    // Wenn nicht authentifiziert, umleiten zur Login-Seite oder einer anderen Route deiner Wahl
-    return <Redirect to="/login" />;
-  }
-
-  // Wenn authentifiziert, zeige Kinderkomponenten
-  return <Route {...props} />;
+type AuthLayoutProps = {
+  children: ReactNode;
 };
+
+const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+  const { isAuthenticated } = useUserContext();
+
+  return (
+    <>
+      {isAuthenticated ? (
+        <Redirect to="/" />
+      ) : (
+        <>
+          <section className="flex flex-1 justify-center items-center flex-col py-10">
+            {children}
+          </section>
+
+          <img
+            src="/assets/images/logo.png"
+            alt="logo"
+            className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat"
+          />
+        </>
+      )}
+    </>
+  );
+}
 
 export default AuthLayout;
