@@ -2,16 +2,30 @@ import React from 'react';
 import { IonItem, IonLabel, IonNote, IonButton, IonIcon } from '@ionic/react';
 import { addCircleOutline } from 'ionicons/icons';
 import { CartItem } from '../types/CartItem';
+import { useShoppingCart } from '../contexts/ShoppingCartContext';
 
 interface MenuItemProps {
   item: CartItem;
-  addToCart: (item: CartItem & { quantity: number }) => void; // Diese Funktion könnte auch den Typ von Item verwenden, wenn nötig
 }
 
+const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
 
-const MenuItem: React.FC<MenuItemProps> = ({ item, addToCart }) => {
-  const handleAddToCart = () => {
-    addToCart({ ...item, quantity: 1 });
+    const { items, setItems } = useShoppingCart();
+
+  const addToCart = () => {
+    setItems((currentItems) => {
+      const existingItemIndex = currentItems.findIndex((cartItem) => cartItem.title === item.title);
+      if (existingItemIndex > -1) {
+        const updatedItems = currentItems.slice();
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + 1,
+        };
+        return updatedItems;
+      } else {
+        return [...currentItems, { ...item, quantity: 1 }];
+      }
+    });
   };
 
   const glassEffectStyle = {
@@ -38,7 +52,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, addToCart }) => {
       <IonButton
         fill="clear"
         style={{ color: '#C5E1A5' }}
-        onClick={handleAddToCart}
+        onClick={addToCart}
       >
         <IonIcon icon={addCircleOutline} className="text-4xl" />
       </IonButton>

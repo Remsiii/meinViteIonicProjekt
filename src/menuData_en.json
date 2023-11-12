@@ -1,0 +1,80 @@
+[
+  {
+    "type": "Appetizer",
+    "title": "Mancacasi Mami",
+    "description": "This English",
+    "price": 5.99
+  },
+  {
+    "type": "Appetizer",
+    "title": "Lol Imagone but in English",
+    "description": "Fried calamari in a fennel and oregano seasoned flour mixture, accompanied by a mild-spicy mayonnaise and harissa sauce. Served with a fresh salad with a delicious lemon-honey dressing.",
+    "price": 22.69
+  },
+  {
+    "type": "Appetizer",
+    "title": "CALAMARI GANG",
+    "description": "Fried fries in a fennel and oregano seasoned flour mixture, accompanied by nuts.",
+    "price": 9.59
+  },
+  {
+    "type": "Main Course",
+    "title": "RISOTTO WITH PANCETTA & VEGETABLES",
+    "description": "Risotto, asparagus, zucchini, pancetta, mint.",
+    "price": 40.99
+  },
+  {
+    "type": "Main Course",
+    "title": "RISOTTO WITH TRUFFLES",
+    "description": "Risotto, butter, truffle cream, parmesan, fresh truffle strips.",
+    "price": 55
+  },
+  {
+    "type": "Main Course",
+    "title": "SPANISH TIGER PRAWNS",
+    "description": "Shrimps, garlic, chili, paprika, lemon, parsley.",
+    "price": 120
+  },
+  {
+    "type": "Main Course",
+    "title": "TAPAS",
+    "description": "Homemade schiacciata gratinated with tomato sauce, shrimp in garlic oil, milk cream and prosciutto croquettes, pimento de padron.",
+    "price": 95.19
+  },
+  {
+    "type": "Main Course",
+    "title": "TAPAS",
+    "description": "Homemade schiacciata gratinated with tomato sauce, shrimp in garlic oil, milk cream and prosciutto croquettes, pimento de padron.",
+    "price": 95
+  },
+  {
+    "type": "Main Course",
+    "title": "TERIYAKI STIR FRY WITH BEEF TENDERLOIN",
+    "description": "Buckwheat soba noodles, tenderloin marinated in soy sauce with ginger, garlic, and chili; bell peppers, carrots, green onions, shimeji mushrooms, baby corn, asparagus.",
+    "price": 120
+  },
+  {
+    "type": "Dessert",
+    "title": "Laurentia Illioni",
+    "description": "Fried calamari in a fennel and oregano seasoned flour mixture, accompanied by a light spicy mayonnaise and harissa sauce. The dish is enhanced by a fresh salad mix with a delicious lemon and honey dressing.",
+    "price": 69.49
+  },
+  {
+    "type": "Beverage",
+    "title": "Doamne Ajuta Drink",
+    "description": "Homemade schiacciata gratinated with tomato sauce, shrimp in garlic oil, milk cream and prosciutto croquettes, pimento de padron.",
+    "price": 11.99
+  },
+  {
+    "type": "Beverage",
+    "title": "Laurentius Water",
+    "description": "Fried calamari in a fennel and oregano seasoned flour mixture, accompanied, with a delicious lemon and honey dressing.",
+    "price": 6.69
+  },
+  {
+    "type": "Beverage",
+    "title": "Paulis Quotes - Chinese",
+    "description": "Pauli is a famous wimp, and accordingly, his quote is also wimpy. He says: 'I am gay and that's okay!'",
+    "price": 24.99
+  }
+]

@@ -3,6 +3,6 @@ export type CartItem = {
     description: string;
     price: number;
     type: string;
-    quantity: number;
+    quantity?: number;
   };
-  
+   

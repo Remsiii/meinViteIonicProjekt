@@ -14,6 +14,28 @@
   --color: #fff; /* Weiße Schriftfarbe */
 }
 
+.cart-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #9CBF91;
+  border-radius: 50%;
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.segment-label {
+  font-size: 1.1em;
+  padding: 8px 16px;
+}
+
+ion-menu-button {
+  padding-bottom: 20px; 
+}
+
 
 /* @layer base {
   * {
