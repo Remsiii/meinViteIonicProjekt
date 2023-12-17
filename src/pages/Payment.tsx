@@ -1,25 +1,23 @@
 import React, { useState, useContext } from 'react';
 import {
     IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
-    IonLabel, IonInput, IonButton, IonIcon
+    IonLabel, IonInput, IonButton, IonIcon, IonToast
 } from '@ionic/react';
 import { cardOutline, cashOutline, peopleOutline, arrowBack } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 
 const PaymentPage: React.FC = () => {
-    const { items, setItems } = useShoppingCart();
+    const { items, setItems, totalAmount } = useShoppingCart();
     const [email, setEmail] = useState('');
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState(false);
 
-    // Fügen Sie hier weitere Zustände für die Zahlungsinformationen hinzu
 
     const handlePayment = () => {
         history.push('/')
-        setItems([]); 
+        setItems([]);
     };
-
-    const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
         <IonPage>
@@ -34,21 +32,27 @@ const PaymentPage: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonLabel>Insgesamt: {total} €</IonLabel>
+                <IonLabel>Insgesamt: {totalAmount.toFixed(2)} €</IonLabel>
                 <IonButton expand="block" onClick={handlePayment} >
                     <IonIcon slot="start" icon={cardOutline} />
                     Online bezahlen
                 </IonButton>
-                <IonButton expand="block" onClick={handlePayment}>
+                <IonButton expand="block" id="present-bar">
                     <IonIcon slot="start" icon={cashOutline} />
                     Barzahlung
                 </IonButton>
+                <IonToast
+                    trigger="present-bar"
+                    isOpen={isOpen}
+                    message="Barzhalung wird eingereicht..."
+                    onDidDismiss={() => setIsOpen(false)}
+                    duration={4000}
+                ></IonToast>
+
                 <IonButton expand="block" onClick={handlePayment}>
                     <IonIcon slot="start" icon={peopleOutline} />
                     Gruppenzahlung
                 </IonButton>
-
-                {/* Fügen Sie hier weitere UI-Elemente hinzu, wie z.B. einen Footer */}
             </IonContent>
         </IonPage>
     );

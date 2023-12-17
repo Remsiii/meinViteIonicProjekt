@@ -30,6 +30,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import PaymentPage from './pages/Payment';
+import MenuComponent from './components/MenuComponent';
 
 setupIonicReact();
 
@@ -40,9 +41,11 @@ const App: React.FC = () => {
     <IonApp>
       <ShoppingCartProvider>
       <IonReactRouter>
+      <MenuComponent />
         <IonRouterOutlet>
           <Router>
             <Switch>
+            <RootLayout>
               {/* public routes */}
               <Route path="/sign-in">
                 <AuthLayout>
@@ -61,18 +64,15 @@ const App: React.FC = () => {
                   <Home />
               </Route>
               <Route path="/cart">
-                <RootLayout>
                   <ShoppingCartPage />
-                </RootLayout>
               </Route>
 
               <Route path="/payment" component={PaymentPage} exact />
-
-
               {/* Redirect von der Root-Route */}
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
+              </RootLayout>
             </Switch>
           </Router>
         </IonRouterOutlet>

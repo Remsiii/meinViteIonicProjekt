@@ -36,6 +36,19 @@ ion-menu-button {
   padding-bottom: 20px; 
 }
 
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #387ef5; /* Wähle eine Farbe, die zu deinem Design passt */
+  font-size: 1.2em;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+
+
 
 /* @layer base {
   * {

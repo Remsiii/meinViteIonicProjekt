@@ -1,16 +1,15 @@
 import React from 'react';
 import { IonItem, IonLabel, IonNote, IonButton, IonIcon } from '@ionic/react';
-import { addCircleOutline } from 'ionicons/icons';
-import { CartItem } from '../types/CartItem';
+import { add, addCircleOutline } from 'ionicons/icons';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 
 interface MenuItemProps {
-  item: CartItem;
+  item: MenuItem;
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
 
-    const { items, setItems } = useShoppingCart();
+  const { items, setItems } = useShoppingCart();
 
   const addToCart = () => {
     setItems((currentItems) => {
@@ -28,6 +27,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
     });
   };
 
+
   const glassEffectStyle = {
     background: 'rgba(255, 255, 255, 0.21)',
     borderRadius: '16px',
@@ -37,17 +37,17 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
     border: '1px solid rgba(255, 255, 255, 0.01)',
   };
 
-  return ( 
+  return (
     <IonItem lines="none" style={glassEffectStyle} className="mb-2">
       <IonLabel className="ion-text-wrap">
         <h2>{item.title}</h2>
         <p>{item.description}</p>
       </IonLabel>
       <div className="flex flex-col justify-center items-end">
-  <IonNote className="text-lg">
-    {item.price.toFixed(2)} €
-  </IonNote>
-</div>
+        <IonNote className="text-lg">
+          {item.price.toFixed(2)} €
+        </IonNote>
+      </div>
 
       <IonButton
         fill="clear"

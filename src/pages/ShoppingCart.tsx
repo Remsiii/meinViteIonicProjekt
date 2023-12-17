@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   IonPage, IonContent, IonList, IonItem, IonLabel,
   IonButton, IonIcon, IonInput, IonHeader, IonToolbar,
-  IonTitle, IonFooter, IonButtons, IonBackButton
+  IonTitle, IonFooter, IonButtons, IonBackButton, IonAlert
 } from '@ionic/react';
-import { pencilOutline, trashOutline, closeCircle, removeCircleOutline, addCircleOutline, pricetagOutline, cashOutline, cardOutline, } from 'ionicons/icons';
+import { pencilOutline, trashOutline, closeCircle, removeCircleOutline, addCircleOutline, pricetagOutline, cashOutline, cardOutline, ticketOutline } from 'ionicons/icons';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 import { useHistory } from 'react-router-dom';
 
 const ShoppingCartPage: React.FC = () => {
   const history = useHistory();
-  const { items, setItems } = useShoppingCart();
+  const { items, setItems, totalAmount, setTotalAmount } = useShoppingCart();
+  const [showCouponInput, setShowCouponInput] = useState(false);
+
+  const checkCouponCode = async (code: string) => {
+    try {
+      // Hier rufst du dein Backend mit dem Coupon-Code auf
+      // Zum Beispiel mit fetch oder axios
+      const response = await fetch('/api/check-coupon', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
+      });
+      if (!response.ok) {
+        throw new Error('Fehler beim Überprüfen des Coupon-Codes');
+      }
+      const data = await response.json();
+      return data; 
+    } catch (error) {
+      console.error('Fehler:', error);
+      alert('Fehler beim Überprüfen des Coupon-Codes');
+    }
+  };
 
   const removeFromCart = (itemTitle: string) => {
     setItems(items.filter(item => item.title !== itemTitle));
@@ -29,13 +52,40 @@ const ShoppingCartPage: React.FC = () => {
 
   const decreaseQuantity = (itemTitle: string) => {
     const item = items.find(item => item.title === itemTitle);
-    if (item && item.quantity > 1) { // Stellen Sie sicher, dass die Menge nicht unter 1 fällt
+    if (item && item.quantity > 1) { 
       updateQuantity(itemTitle, item.quantity - 1);
     }
   };
 
   const clearCart = () => {
-    setItems([]); // Setzt den Warenkorb zurück, indem ein leeres Array übergeben wird
+    setItems([]);
+  };
+
+  const addTip = (percentage: number) => {
+    const tipAmount = totalAmount * percentage;
+    setTotalAmount(totalAmount + tipAmount);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  useEffect(() => {
+    const newTotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
+    setTotalAmount(newTotal);
+  }, [items]);
+
+  const applyCoupons = (code: string) => {
+    let newDiscount = 0;
+    if (code === "RABATT10") {
+      newDiscount = 0.1; // 10% Rabatt
+    } else {
+      alert("Ungültiger Coupon-Code");
+      return;
+    }
+    // Berechne den neuen Gesamtbetrag mit dem Rabatt
+    const newTotal = totalAmount - (totalAmount * newDiscount);
+    setTotalAmount(newTotal);
+    setShowCouponInput(false); // Eingabefeld ausblenden
   };
 
   return (
@@ -90,21 +140,59 @@ const ShoppingCartPage: React.FC = () => {
           <IonIcon slot="start" icon={trashOutline} />
           Alles Löschen
         </IonButton>
-        <IonButton expand="block" style={{ marginBottom: '1rem' }}>
-          <IonIcon slot="start" icon={pricetagOutline} />
-          Coupon anwenden
-        </IonButton>
-        <IonButton expand="block" style={{ marginBottom: '1rem' }}>
+
+        <IonButton expand="block" style={{ marginBottom: '1rem' }} id="present-alert">
+          <IonIcon slot="start" icon={ticketOutline} />
+          Coupon Anwenden</IonButton>
+
+        <IonAlert
+          trigger="present-alert"
+          header="Bitte füge dein Coupon hier hinein"
+          buttons={[
+            {
+              text: 'Anwenden',
+              handler: (data) => {
+                applyCoupons(data[0]);
+              }
+            }
+          ]}
+          inputs={[
+            {
+              placeholder: 'Coupon',
+            },
+          ]}
+        ></IonAlert>
+
+        <IonButton expand="block" style={{ marginBottom: '1rem' }} id="present-tip-alert">
           <IonIcon slot="start" icon={cashOutline} />
           Trinkgeld hinzufügen
         </IonButton>
-        
+
+        <IonAlert
+          trigger="present-tip-alert"
+          header="Trinkgeld auswählen"
+          buttons={[
+            {
+              text: '5%',
+              handler: () => addTip(0.05)
+            },
+            {
+              text: '15%',
+              handler: () => addTip(0.15)
+            },
+            {
+              text: 'Abbrechen',
+              role: 'cancel'
+            }
+          ]}
+          message="Wie viel Trinkgeld möchtest du hinzufügen?"
+        ></IonAlert>
+
         <div style={{ borderTop: '1px solid #e0e0e0', margin: '16px 0' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
           <IonLabel style={{ fontSize: '1.1rem' }}>INGESAMT:</IonLabel>
           <IonLabel style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>
-            {/* Hier sollten Sie die Gesamtsumme berechnen und anzeigen */}
-            {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)} €
+            {totalAmount.toFixed(2)} €
           </IonLabel>
         </div>
         <IonButton expand="block" onClick={() => history.push('/payment')}>
@@ -117,3 +205,116 @@ const ShoppingCartPage: React.FC = () => {
 };
 
 export default ShoppingCartPage;
+
+{/* <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: #374151;
+            border-color: #d1d5db;
+        }
+        .btn-red {
+            background-color: #ef4444;
+            color: white;
+        }
+        .btn-red:hover {
+            background-color: #dc2626;
+        }
+        .btn-white {
+            background-color: white;
+            color: #4b5563;
+        }
+        .btn-white:hover {
+            background-color: #f9fafb;
+        }
+        .input-quantity {
+            width: 2rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto">
+        <!-- Header -->
+        <div class="text-center p-4 bg-white shadow-md">
+            <div class="text-lg font-bold">COȘUL MEU</div>
+            <div class="text-sm">MASA #6</div>
+            <button class="absolute top-0 right-0 p-4">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="mt-4 space-y-4">
+            <div class="flex justify-between items-center p-4 bg-white shadow-md rounded">
+                <div class="flex-1">
+                    <div class="font-bold">BRIOCHE CU RICOTTA ȘI AFINE</div>
+                    <div class="flex items-center mt-2">
+                        <button class="btn btn-outline">-</button>
+                        <input type="text" class="input-quantity mx-2" value="1" readonly>
+                        <button class="btn btn-outline">+</button>
+                    </div>
+                </div>
+                <div class="flex-1 text-right">
+                    <div class="font-bold">35.00 LEI</div>
+                    <div class="flex justify-end items-center mt-2">
+                        <button class="btn btn-outline mr-2"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-outline text-red-500"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center p-4 bg-white shadow-md rounded">
+                <div class="flex-1">
+                    <div class="font-bold">EGGS IN PURGATORY</div>
+                    <div class="flex items-center mt-2">
+                        <button class="btn btn-outline">-</button>
+                        <input type="text" class="input-quantity mx-2" value="1" readonly>
+                        <button class="btn btn-outline">+</button>
+                    </div>
+                </div>
+                <div class="flex-1 text-right">
+                    <div class="font-bold">35.00 LEI</div>
+                    <div class="flex justify-end items-center mt-2">
+                        <button class="btn btn-outline mr-2"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-outline text-red-500"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 p-4 space-y-2">
+            <button class="w-full btn btn-red">GOLEȘTE COȘUL</button>
+            <button class="w-full btn btn-white">APLICĂ CUPON</button>
+            <button class="w-full btn btn-white">ADAUGĂ BACȘIȘ</button>
+        </div>
+
+        <div class="flex justify-between items-center p-4 bg-brown-600 text-white">
+            <div>TOTAL:</div>
+            <div class="font-bold">70 LEI</div>
+            <button class="btn btn-white">PLĂTEȘTE</button>
+        </div>
+    </div>
+</body>
+</html> */}
