@@ -50,14 +50,13 @@ const MenuComponent = () => {
         </IonHeader>
         <IonContent className="ion-padding">
 
-            
-            {!showLanguageMenu && (
-              <>
-              <div>Profile</div>
-            <IonItem button>
-              Anmelden
-              <IonIcon icon={person} slot='end' />
-            </IonItem>
+          {!showLanguageMenu && (
+            <>
+              <IonListHeader>Profile</IonListHeader>
+              <IonItem button>
+                Profil bearbeiten
+              </IonItem>
+              <IonListHeader>Sprache ändern</IonListHeader>
             </>
           )}
           {showLanguageMenu ? (
@@ -66,6 +65,7 @@ const MenuComponent = () => {
                 <IonIcon icon={arrowBack} style={{ marginRight: '5px' }} />
                 <IonLabel>Zurück</IonLabel>
               </div>
+              <IonListHeader>Sprache</IonListHeader>
               <IonItem button onClick={() => handleLanguageChange('de')}>Deutsch</IonItem>
               <IonItem button onClick={() => handleLanguageChange('en')}>English</IonItem>
             </>
@@ -77,10 +77,20 @@ const MenuComponent = () => {
               </IonItem>
             </>
           )}
+          <IonListHeader>Settings</IonListHeader>
+              <IonItem button>
+                Profil bearbeiten
+              </IonItem>
+              <IonItem button>
+                Abmelden
+              <IonIcon icon={person} slot='end' />
+              </IonItem>
         </IonContent>
       </IonMenu>
     </>
   )
 }
+
+
 
 export default MenuComponent
